@@ -1,0 +1,63 @@
+#app .room-item {
+    padding: 1px 0;
+    border-bottom: 1px solid #ccc;
+}
+#app .room-item .pin_room {
+    left: 0;
+    right: unset;
+    top: 0;
+    height: 100%;
+    border-left: 5px solid #f44336;
+}
+#app .room-item .pin_room svg {
+    display: none;
+}
+#app .open-thread-room svg {
+    top: 30%;
+}
+#app .room-item:hover .pin_room{
+    display: block;
+    border: none;
+}
+#app .room-item:hover .pin_room svg{
+    display: inline-block;
+    height: 100%;
+    margin-left: 2px;
+}
+#app [id^=room-item-] .container {
+    padding: 0 50px 0 20px!important;
+}
+#app .room-list .rounded-circle {
+    width: 25px !important;
+    height: 25px !important;
+}
+#app .room-item.active, #app .room-item.active:hover {
+    background-color: rgb(223 180 166);
+}
+#app .room-filter .dropdown-custom button {
+    padding: 1px 15px;
+}
+#app .room-list-header, #app .room-chat-header {
+    height: 30px;
+}
+#app .header-room-name img {
+    display: none;
+}
+#app #header {
+    right: 0;
+    position: absolute;
+    width: calc(100% - 311px);
+    height: 45px;
+}
+#app #header .logo {
+    display: none;
+}
+#app .main-content {
+    margin-top: 45px;
+}
+#app .content {
+    height: 100%;
+}
+#app .search {
+    padding-left: 50px;
+}
