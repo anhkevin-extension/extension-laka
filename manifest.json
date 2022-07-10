@@ -1,0 +1,49 @@
+{
+    "manifest_version": 2,
+    "name": "Laka Extension",
+    "description": "This is extension for Laka",
+    "version": "2.3.1",
+    "browser_action": {
+        "default_icon": "images/icon.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": [
+            "js/jquery.min.js",
+            "js/background.js"
+        ],
+        "persistent": false
+    },
+    "permissions": [
+    	"management",
+        "activeTab",
+        "storage",
+        "cookies",
+        "tabs",
+        "https://project.lampart-vn.com/*",
+        "https://laka.lampart-vn.com/*"
+    ],
+    "content_scripts": [
+        {
+            "css": ["css/laka.css"],
+            "js": ["js/jquery.min.js","js/laka.js"],
+            "matches": ["https://laka.lampart-vn.com/*"],
+            "run_at":    "document_start"
+        },
+        {
+          "css": ["css/redmine.css"],
+          "js": ["js/jquery.min.js","js/redmine.js"],
+          "matches": ["https://project.lampart-vn.com/*"],
+          "run_at":    "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        "images/ui-icons_444444_256x240.png",
+        "images/ui-icons_555555_256x240.png",
+        "images/ui-icons_777620_256x240.png",
+        "images/ui-icons_777777_256x240.png",
+        "images/ui-icons_cc0000_256x240.png",
+        "images/ui-icons_ffffff_256x240.png",
+        "images/loader.gif"
+    ]
+}
