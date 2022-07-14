@@ -44,35 +44,8 @@ function checkFinishOrContinue(index, scripts) {
 /*
  * Load Script From Content_Script 
  */
-var beforeScript = {};
-chrome.webNavigation.onCommitted.addListener(function(details) {
-	var scriptMatches = loadMatchScript(manifest.content_scripts, details.url, 'document_start');
-    console.log(scriptMatches);
-    if (scriptMatches.css.length > 0) {
-		loadInsertCSS(details.tabId, scriptMatches.css, 0);
-	}
-    if (scriptMatches.js.length > 0) {
-    	doExecuteScript(scriptMatches.js, 0, function(scripts, index, result) {    		
-    		beforeScript[scripts[index]] = result;
-    		chrome.tabs.executeScript(details.tabId, {code: result}, function(rs){
-    			console.log('Lac 1', rs);
-    		});
-    	});
-	}
-});
-
-chrome.webNavigation.onCommitted.addListener(function(details) {
-	for (const prop in beforeScript) {
-//		console.log(beforeScript[prop]);
-//		chrome.tabs.executeScript(details.tabId, {code: beforeScript[prop]}, function(){
-//		
-//		});
-	}
-	
-});
-
 chrome.webNavigation.onCompleted.addListener(function(details) {
-    var scriptMatches = loadMatchScript(manifest.content_scripts, details.url, 'document_end');
+    var scriptMatches = loadMatchScript(manifest.content_scripts, details.url);
     console.log(scriptMatches);
     if ($.isReady) {
     	if (scriptMatches.css.length > 0) {
@@ -93,12 +66,9 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
     }
 });
 
-function loadMatchScript(scripts, url, param_run_at) {
+function loadMatchScript(scripts, url) {
 	var scriptMatches = {'js':[], 'css':[]};
 	$.each(scripts, function(i, objScript){
-		if (objScript.hasOwnProperty('run_at') && objScript.run_at != param_run_at) {
-			return;
-		}
 		if (checkMatchUrl(url, objScript.matches)) {
 			if (objScript.hasOwnProperty('js')) {
 				$.each(objScript.js, function(j, js){
@@ -136,13 +106,6 @@ function buildURL(script) {
 //        }
 //    }    
 //}); 
-function doExecuteScript (scripts, index, callback) {
-	if (typeof scripts[index] !== 'undefined') {
-	    $.get(buildURL(scripts[index]), function(result) {
-	    	callback(scripts, index, result);
-	    }, "text");
-	}
-}
 
 function loadExecuteScript (tabId, scripts, index) {
 	if (typeof scripts[index] !== 'undefined') {
