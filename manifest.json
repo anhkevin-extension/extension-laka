@@ -25,8 +25,8 @@
     ],
     "content_scripts": [
         {
-            "css": ["css/laka.css"],
-            "js": ["js/jquery.min.js","js/laka.js"],
+            "css": ["css/laka.css","css/todolist.css"],
+            "js": ["js/jquery.min.js","js/laka.js","js/todolist.js"],
             "matches": ["https://laka.lampart-vn.com/*"],
             "run_at":    "document_start"
         },
