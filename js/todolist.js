@@ -1,6 +1,6 @@
 console.log('todolist.js');
 $(function () {
-    setTimeout(function(){
+    var timerLoadWatch = setInterval(function() {
         // icon task
         if ($('#navigation').length > 0) {
             console.log('Add icon TODOLIST');
@@ -9,8 +9,10 @@ $(function () {
             loadHtmlTodolist();
 
             refreshTodoList();
+            
+            clearInterval(timerLoadWatch);
         }
-    }, 5000);
+    }, 1000);
 });
 
 function loadHtmlTodolist(){
