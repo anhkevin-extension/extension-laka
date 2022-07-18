@@ -59,3 +59,41 @@ function uniqueArray(arr) {
 		return self.indexOf(value) === index;
 	});
 }
+
+$.ajaxBG = function(option) {
+	var success = false;
+	var error = false;
+	var callback = {};
+//	if (option.hasOwnProperty('success')) {
+//		callback['success'] = option.success;
+//		delete option.success;
+//	}
+//	if (option.hasOwnProperty('error')) {
+//		callback['error'] = option.error;
+//		delete option.error;
+//	}
+//	if (option.hasOwnProperty('complete')) {
+//		callback['complete'] = option.complete;
+//		delete option.complete;
+//	}
+	if (option.hasOwnProperty('data')) {
+		option['data']['_location_href'] = location.href;
+	} else {
+		option['data'] = {'_location_href' : location.href};
+	}
+	chrome.runtime.sendMessage({
+		  'action': 'ajax',
+		  'option': option
+	}, function(response) {
+		console.log('$.ajaxBG -> ', response);
+		if (response && response.hasOwnProperty('callback') && option.hasOwnProperty(response.callback)) {
+			option[response.callback](response.response, response.textStatus, response.xhr);
+		} else 
+//			if (option.hasOwnProperty('error')) 
+		{
+			console.log('Recall $.ajaxBG ↵');
+			$.ajaxBG(option);
+//			callback['error'](null, null, null);
+		}
+	});
+};
