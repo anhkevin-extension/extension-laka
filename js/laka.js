@@ -27,9 +27,8 @@ function processChatText() {
                 matches_array = str.match(regexp);
             }
 			if (matches_array) {
-				let token_redmine = '';
-				let userInfo = getStoreFromKey('userInfo');
-				let token_redmine = userInfo.api_key;
+				var userInfo = getStoreFromKey('userInfo');
+				var token_redmine = userInfo.api_key;
 				matches_array = uniqueArray(matches_array);
 				$.each(matches_array, function(i, v){
 					console.log(v);
