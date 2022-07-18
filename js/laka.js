@@ -28,8 +28,12 @@ function processChatText() {
             }
 			if (matches_array) {
 				var userInfo = getStoreFromKey('userInfo');
-				var token_redmine = userInfo.api_key;
+				var token_redmine = '';
+				if(userInfo && userInfo.api_key) {
+					token_redmine = userInfo.api_key;
+				}
 				matches_array = uniqueArray(matches_array);
+				if (token_redmine != '') {
 				$.each(matches_array, function(i, v){
 					console.log(v);
 					$.ajaxBG({
@@ -50,6 +54,7 @@ function processChatText() {
 			            }
 			        });
 				});
+					}
 			} else {
 				alert("Error! Please enter redmine link want to confirm in the message box.\nThanks");
 			}
