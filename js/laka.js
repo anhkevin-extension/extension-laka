@@ -9,6 +9,7 @@ $(function () {
             clearInterval(timerLoadWatch);
         }
     }, 1000);
+    getStoreFromServer();
 });
 
 function processChatText() {
@@ -26,11 +27,14 @@ function processChatText() {
                 matches_array = str.match(regexp);
             }
 			if (matches_array) {
+				let token_redmine = '';
+				let userInfo = getStoreFromKey('userInfo');
+				console.log(userInfo);
 				matches_array = uniqueArray(matches_array);
 				$.each(matches_array, function(i, v){
 					console.log(v);
 					$.ajaxBG({
-			            url: v + '.json',
+			            url: v + '.json?token='+token_redmine,
 			            method: 'GET',
 			            dataType: 'json',
 			            headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -97,3 +101,68 @@ $.ajaxBG = function(option) {
 		}
 	});
 };
+
+function getStoreFromServer() {
+    $.ajaxBG({
+        url: apiUrl + 'get-store',
+        method: 'GET',
+        dataType: 'json',
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        success: function (response, textStatus, xhr) {
+            if (Object.keys(response).length > 0) {
+                $.each(response, function (key, value) {
+                    var data = null;
+                    switch (key) {
+                        case 'environment':
+                        case 'extra':
+                        case 'tracker':
+                        case 'status':
+                        case 'userList':
+                        case 'userTracker':
+                        case 'userInfo':
+                        case 'done_ratio':
+                        case 'priority':
+                        case 'targetVersion':
+                            data = JSON.stringify(value);
+                            break;
+                    }
+                    if (data) {
+                        localStorage.setItem(key, data);
+                    }
+                });
+            } else {
+                console.log(json);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            if (serverUrl.search(document.domain) === -1)
+                console.log('Connect to get store from ' + serverUrl + ' failed. Please check authentication!!');
+        }
+    });
+}
+
+var cacheStore = {};
+function getStoreFromKey(key) {
+    data = {};
+    switch (key) {
+        case 'environment':
+        case 'extra':
+        case 'tracker':
+        case 'status':
+        case 'userList':
+        case 'userTracker':
+        case 'userInfo':
+        case 'done_ratio':
+        case 'priority':
+        case 'targetVersion':
+        	if (!cacheStore.hasOwnProperty(key)) {
+                data = localStorage.getItem(key);
+                data = JSON.parse(data);
+                cacheStore[key] = data;
+        	} else {
+        		data = cacheStore[key];
+        	}
+            break;
+    }
+    return data;
+}
