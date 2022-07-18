@@ -41,7 +41,7 @@ function processChatText() {
 				if (token_redmine != '') {
 				$.each(matches_array, function(i, v){
 					console.log(v);
-					$.ajaxBG({
+					$.ajax({
 			            url: v + '.json?key='+token_redmine,
 			            method: 'GET',
 			            dataType: 'json',
