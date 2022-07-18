@@ -1,5 +1,6 @@
 console.log('laka.js');
 
+/*
 var serverUrl = 'http://project.redmine-chatwork.com/';
 var apiUrl = serverUrl + 'api/', redmineUrl = 'https://project.lampart-vn.com/issues/', timeDomChange = null,
     dialog = null;
@@ -174,4 +175,4 @@ function getStoreFromKey(key) {
             break;
     }
     return data;
-}
+}*/
