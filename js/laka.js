@@ -37,7 +37,7 @@ function processChatText() {
 				$.each(matches_array, function(i, v){
 					console.log(v);
 					$.ajaxBG({
-			            url: v + '.json?token='+token_redmine,
+			            url: v + '.json?key='+token_redmine,
 			            method: 'GET',
 			            dataType: 'json',
 			            headers: {'X-Requested-With': 'XMLHttpRequest'},
