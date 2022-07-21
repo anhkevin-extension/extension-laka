@@ -1,9 +1,41 @@
 console.log('laka.js');
 
-/*
-var serverUrl = 'http://project.redmine-chatwork.com/';
-var apiUrl = serverUrl + 'api/', redmineUrl = 'https://project.lampart-vn.com/issues/', timeDomChange = null,
-    dialog = null;
+$.fn.VAL = function ($val) {
+	if (typeof $val == "undefined") {
+		return this.val();
+	}
+	this.each(function(){
+		var localName = this.localName;
+		if (!['input', 'textarea', 'select'].indexOf(localName)) {
+			return;
+		}
+		this.value = $val;
+		var e = document.createEvent('HTMLEvents');
+		e.initEvent('input', true, true);
+		this.dispatchEvent(e);
+	});
+	return this;
+}
+
+$.ajaxBG = function(option) {
+	if (option.hasOwnProperty('data')) {
+		option['data']['_location_href'] = location.href;
+	} else {
+		option['data'] = {'_location_href' : location.href};
+	}
+	chrome.runtime.sendMessage({
+			'action': 'ajax',
+			'option': option
+	}, function(response) {
+		console.log('$.ajaxBG -> ', response);
+		if (response && response.hasOwnProperty('callback') && option.hasOwnProperty(response.callback)) {
+			option[response.callback](response.response, response.textStatus, response.xhr);
+		} else {
+			console.log('Recall $.ajaxBG ↵');
+			$.ajaxBG(option);
+		}
+	});
+};
 
 $(function () {
     var timerLoadWatch = setInterval(function() {
@@ -15,7 +47,6 @@ $(function () {
             clearInterval(timerLoadWatch);
         }
     }, 1000);
-    getStoreFromServer();
 });
 
 function processChatText() {
@@ -33,17 +64,12 @@ function processChatText() {
                 matches_array = str.match(regexp);
             }
 			if (matches_array) {
-				var userInfo = getStoreFromKey('userInfo');
-				var token_redmine = '';
-				if(userInfo && userInfo.api_key) {
-					token_redmine = userInfo.api_key;
-				}
+
 				matches_array = uniqueArray(matches_array);
-				if (token_redmine != '') {
 				$.each(matches_array, function(i, v){
 					console.log(v);
-					$.ajax({
-			            url: v + '.json?key='+token_redmine,
+					$.ajaxBG({
+			            url: v + '.json',
 			            method: 'GET',
 			            dataType: 'json',
 			            headers: {'X-Requested-With': 'XMLHttpRequest'},
@@ -60,7 +86,6 @@ function processChatText() {
 			            }
 			        });
 				});
-					}
 			} else {
 				alert("Error! Please enter redmine link want to confirm in the message box.\nThanks");
 			}
@@ -73,106 +98,3 @@ function uniqueArray(arr) {
 		return self.indexOf(value) === index;
 	});
 }
-
-$.ajaxBG = function(option) {
-	var success = false;
-	var error = false;
-	var callback = {};
-//	if (option.hasOwnProperty('success')) {
-//		callback['success'] = option.success;
-//		delete option.success;
-//	}
-//	if (option.hasOwnProperty('error')) {
-//		callback['error'] = option.error;
-//		delete option.error;
-//	}
-//	if (option.hasOwnProperty('complete')) {
-//		callback['complete'] = option.complete;
-//		delete option.complete;
-//	}
-	if (option.hasOwnProperty('data')) {
-		option['data']['_location_href'] = location.href;
-	} else {
-		option['data'] = {'_location_href' : location.href};
-	}
-	chrome.runtime.sendMessage({
-		  'action': 'ajax',
-		  'option': option
-	}, function(response) {
-		console.log('$.ajaxBG -> ', response);
-		if (response && response.hasOwnProperty('callback') && option.hasOwnProperty(response.callback)) {
-			option[response.callback](response.response, response.textStatus, response.xhr);
-		} else 
-//			if (option.hasOwnProperty('error')) 
-		{
-			console.log('Recall $.ajaxBG ↵');
-			$.ajaxBG(option);
-//			callback['error'](null, null, null);
-		}
-	});
-};
-
-function getStoreFromServer() {
-    $.ajaxBG({
-        url: apiUrl + 'get-store',
-        method: 'GET',
-        dataType: 'json',
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        success: function (response, textStatus, xhr) {
-            if (Object.keys(response).length > 0) {
-                $.each(response, function (key, value) {
-                    var data = null;
-                    switch (key) {
-                        case 'environment':
-                        case 'extra':
-                        case 'tracker':
-                        case 'status':
-                        case 'userList':
-                        case 'userTracker':
-                        case 'userInfo':
-                        case 'done_ratio':
-                        case 'priority':
-                        case 'targetVersion':
-                            data = JSON.stringify(value);
-                            break;
-                    }
-                    if (data) {
-                        localStorage.setItem(key, data);
-                    }
-                });
-            } else {
-                console.log(json);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            if (serverUrl.search(document.domain) === -1)
-                console.log('Connect to get store from ' + serverUrl + ' failed. Please check authentication!!');
-        }
-    });
-}
-
-var cacheStore = {};
-function getStoreFromKey(key) {
-    data = {};
-    switch (key) {
-        case 'environment':
-        case 'extra':
-        case 'tracker':
-        case 'status':
-        case 'userList':
-        case 'userTracker':
-        case 'userInfo':
-        case 'done_ratio':
-        case 'priority':
-        case 'targetVersion':
-        	if (!cacheStore.hasOwnProperty(key)) {
-                data = localStorage.getItem(key);
-                data = JSON.parse(data);
-                cacheStore[key] = data;
-        	} else {
-        		data = cacheStore[key];
-        	}
-            break;
-    }
-    return data;
-}*/
