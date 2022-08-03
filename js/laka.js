@@ -47,6 +47,10 @@ $(function () {
             clearInterval(timerLoadWatch);
         }
     }, 1000);
+	
+	setTimeout(function(){
+		analytic_click();
+	}, 1000);
 });
 
 function processChatText() {
@@ -97,4 +101,36 @@ function uniqueArray(arr) {
 	return arr.filter(function(value, index, self){
 		return self.indexOf(value) === index;
 	});
+}
+
+function analytic_click() {
+
+	const get_store = localStorage.getItem('userInfo');
+	const userInfo = JSON.parse(get_store);
+	if(userInfo) {
+		$.ajaxBG({
+			url: 'https://laka-tian.herokuapp.com/analytic',
+			method: 'POST',
+			dataType: 'json',
+			data: {'quote': userInfo.id + '|' + currentDate(), 'author': userInfo.lastname + ' ' + userInfo.firstname},
+			success: function (response, textStatus, xhr) {
+				// console.log(response);
+			},
+			error: function (response, textStatus, xhr) {
+				// console.log("FAIL!");
+			}
+		});
+	}
+}
+
+function currentDate(format = 'yy-mm-dd') {
+	const date = new Date();
+    const map = {
+        mm: date.getMonth() + 1,
+        dd: date.getDate(),
+        yy: date.getFullYear(),
+        yyyy: date.getFullYear()
+    }
+
+    return format.replace(/mm|dd|yy|yyy/gi, matched => map[matched])
 }
