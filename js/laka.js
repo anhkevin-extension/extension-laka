@@ -105,14 +105,14 @@ function uniqueArray(arr) {
 
 function analytic_click() {
 
-	const get_store = localStorage.getItem('userInfo');
+	const get_store = localStorage.getItem('user');
 	const userInfo = JSON.parse(get_store);
 	if(userInfo) {
 		$.ajaxBG({
 			url: 'https://laka-tian.herokuapp.com/analytic',
 			method: 'POST',
 			dataType: 'json',
-			data: {'quote': userInfo.id + '|' + currentDate(), 'author': userInfo.lastname + ' ' + userInfo.firstname},
+			data: {'quote': userInfo.user_id + '|' + currentDate(), 'author': userInfo.user_id},
 			success: function (response, textStatus, xhr) {
 				// console.log(response);
 			},
