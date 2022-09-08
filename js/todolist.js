@@ -94,8 +94,19 @@ function refreshTodoList() {
     }
 }
 
+function rep(text) {
+    // Put the URL to variable $1 after visiting the URL
+    var Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
+             
+    // Replace the RegExp content by HTML element
+    return text.replace(Rexp, "<a href='$1' target='_blank'>Link to URL</a>");
+}
+
 // Create a new list item when clicking on the "Add" button
 function createNewTodo(todo) {
+    
+    todo.text = rep(todo.text);
+    
     // ------------- show todo
     var li = document.createElement("li");
     var t = document.createTextNode(todo.text);
