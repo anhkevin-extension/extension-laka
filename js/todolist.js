@@ -106,12 +106,12 @@ function rep(text) {
 // Create a new list item when clicking on the "Add" button
 function createNewTodo(todo) {
     
-    todo.text = rep(todo.text);
+//    todo.text = rep(todo.text);
     
     // ------------- show todo
     var li = document.createElement("li");
-//    var t = document.createTextNode(todo.text);
-    var t = todo.text;
+    var t = document.createTextNode(todo.text);
+ //   var t = todo.text;
     li.appendChild(t);
 
     if (todo.checked) li.classList = 'checked';
