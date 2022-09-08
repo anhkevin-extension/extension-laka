@@ -99,7 +99,8 @@ function rep(text) {
     var Rexp = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;
              
     // Replace the RegExp content by HTML element
-    return text.replace(Rexp, "<a href='$1' target='_blank'>Link to URL</a>");
+    var t = document.createTextNode(text);
+    return t.replace(Rexp, "<a href='$1' target='_blank'>$1</a>");
 }
 
 // Create a new list item when clicking on the "Add" button
