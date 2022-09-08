@@ -109,7 +109,8 @@ function createNewTodo(todo) {
     
     // ------------- show todo
     var li = document.createElement("li");
-    var t = document.createTextNode(todo.text);
+//    var t = document.createTextNode(todo.text);
+    var t = todo.text;
     li.appendChild(t);
 
     if (todo.checked) li.classList = 'checked';
