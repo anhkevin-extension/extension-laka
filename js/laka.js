@@ -51,6 +51,16 @@ $(function () {
 	setTimeout(function(){
 		analytic_click();
 	}, 1000);
+	
+	var renderMenuMore = setInterval(function() {
+      
+		if ($('#room-list').length > 0) {
+
+		    $('#room-list').css("height", "500px");
+
+		    clearInterval(renderMenuMore);
+		}
+    	}, 1000);
 });
 
 function processChatText() {
