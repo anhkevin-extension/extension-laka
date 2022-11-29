@@ -56,7 +56,11 @@ $(function () {
       
 		if ($('#room-list').length > 0) {
 
-		    $('#room-list').css("height", "500px");
+		    var elem_room_list = document.getElementById('room-list');
+		    elem_room_list.style.height = "500px";
+		    elem_room_list.scrollTop = 1000;
+		    elem_room_list.style.height = "";
+		    elem_room_list.scrollTop = 0;
 
 		    clearInterval(renderMenuMore);
 		}
