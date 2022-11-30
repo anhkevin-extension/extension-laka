@@ -54,7 +54,7 @@ $(function () {
 	
 	var renderMenuMore = setInterval(function() {
       
-		if ($('#room-list').length > 0) {
+		if ($('#room-list ul>li').length > 0) {
 
 		    var elem_room_list = document.getElementById('room-list');
 		    elem_room_list.style.height = "500px";
