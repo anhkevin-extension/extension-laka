@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Laka Extension",
     "description": "This is extension for Laka",
-    "version": "2.3.2",
+    "version": "2.3.3",
     "browser_action": {
         "default_icon": "images/icon.png",
         "default_popup": "popup.html"
