@@ -48,11 +48,6 @@ $(function () {
         }
     }, 1000);
 	
-	setTimeout(function(){
-		
-		();
-	}, 1000);
-	
 	var renderMenuMore = setInterval(function() {
       
 		if ($('#room-list ul>li').length > 0) {
@@ -120,7 +115,6 @@ function uniqueArray(arr) {
 
 function analytic_click() {
 
-	/*
 	const get_store = localStorage.getItem('user');
 	const userInfo = JSON.parse(get_store);
 	if(userInfo) {
@@ -136,7 +130,7 @@ function analytic_click() {
 				// console.log("FAIL!");
 			}
 		});
-	}*/
+	}
 }
 
 function currentDate(format = 'yy-mm-dd') {
