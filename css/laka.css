@@ -1,4 +1,4 @@
-#app .room-item {
+#app>#room-list>ul>li.room-item {
     padding: 1px 0;
     border-bottom: 1px solid #ccc;
 }
