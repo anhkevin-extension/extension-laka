@@ -1,6 +1,6 @@
 console.log('main.js')
 
-injectContentCss(httpGet('/css/laka.css'));
+injectContentCss(httpGet('../css/laka.css'));
 
 function injectContentCss(css) 
 {
