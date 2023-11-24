@@ -1,6 +1,6 @@
 console.log('main.js')
 
-injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/laka.css'));
+injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/laka.css?'++(new Date().getTime())));
 
 function injectContentCss(css) 
 {
