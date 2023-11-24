@@ -20,7 +20,7 @@
     display: none;
 }
 #app .open-thread-room svg {
-    top: 30%;
+    top: 7px;
 }
 #app .room-item:hover .pin_room{
     display: block;
