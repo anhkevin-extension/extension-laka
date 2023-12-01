@@ -1,6 +1,9 @@
-console.log('main.js')
+var get_host = location.hostname;
 
-injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/laka.css?'+(new Date().getTime())));
+if (get_host == 'laka.lampart-vn.com')
+{
+	injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/laka.css?'+(new Date().getTime())));
+}
 
 function injectContentCss(css) 
 {
