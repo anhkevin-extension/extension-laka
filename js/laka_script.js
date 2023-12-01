@@ -7,12 +7,12 @@ console.log('Loaded laka_script.js');
 
     var iconChatElement = document.getElementById("chat-send-icon");
     var newIconChat = document.createElement("div");
-    newIconChat.innerHTML ='<li id="_redmineInfo" class="_showDescription chatInput__redmineInfo" role="button" title="Get Redmine Task Subject"><span class="chatInput__iconContainer">【S】</span></span></li>';
+    newIconChat.innerHTML ='<li id="_redmineInfoTest" class="_showDescription chatInput__redmineInfo" role="button" title="Get Redmine Task Subject"><span class="chatInput__iconContainer">【S】</span></span></li>';
     newIconChat.innerHTML +='<li id="_redmineCC" class="_showDescription chatInput__redmineInfo" role="button" title="Get Redmine Task Related Members (To/CC)"><span class="chatInput__iconContainer">【C】</span></li>';
-    //iconChatElement.appendChild(newIconChat);
+    iconChatElement.appendChild(newIconChat);
 
     // Click #_redmineInfo
-    document.getElementById("_redmineInfo").addEventListener("click", function() {
+    document.getElementById("_redmineInfoTest").addEventListener("click", function() {
         var str = document.querySelector(".chat-input-textarea textarea").value;
         var regexp = /https\:\/\/redmine\.lampart\-vn\.com\/issues\/\d+/gi;
         var matches_array = str.match(regexp);
