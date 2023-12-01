@@ -12,8 +12,9 @@ function injectContentCss(css, title)
 	if (styleElement) {
   		styleElement.textContent = css;
 	} else {
-		var styleNew = document.createElement("style[title='" + title + "']");
-	  	styleNew.innerHTML = css;
+		var styleNew = document.createElement("style");
+		styleNew.setAttribute("title", title);
+	  	styleNew.textContent = css;
 	  	document.head.appendChild(styleNew);
 	}
 }
