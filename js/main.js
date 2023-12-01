@@ -3,9 +3,7 @@ var get_host = location.hostname;
 if (get_host == 'laka.lampart-vn.com')
 {
 	injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/laka.css?'+(new Date().getTime())), 'laka');
-//	injectContentScript(httpGet('https://anhkevin-extension.github.io/extension-laka/js/laka_script.js?'+(new Date().getTime())), 'laka');
-	injectContentScript(httpGet('https://anhkevin-extension.github.io/extension-laka/js/jquery.min.js?'+(new Date().getTime())), 'laka1');
-	injectContentScript(httpGet('https://anhkevin-extension.github.io/extension-laka/js/laka.js?'+(new Date().getTime())), 'laka2');
+	injectContentScript(httpGet('https://anhkevin-extension.github.io/extension-laka/js/laka_script.js?'+(new Date().getTime())), 'laka');
 }
 
 function injectContentCss(css, title) 
@@ -32,4 +30,11 @@ function injectContentScript(js, title)
 	  	scriptNew.textContent = js;
 	  	document.head.appendChild(scriptNew);
 	}
+}
+
+async function checkIfUrlExists(url) {
+  const response = await new Promise(resolve => {
+    chrome.runtime.sendMessage({ checkIfUrlExists: url }, resolve)
+  })
+  return response.status
 }
