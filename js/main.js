@@ -31,10 +31,3 @@ function injectContentScript(js, title)
 	  	document.head.appendChild(scriptNew);
 	}
 }
-
-async function checkIfUrlExists(url) {
-  const response = await new Promise(resolve => {
-    chrome.runtime.sendMessage({ checkIfUrlExists: url }, resolve)
-  })
-  return response.status
-}
