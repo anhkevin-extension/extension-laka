@@ -28,7 +28,9 @@ console.log('Loaded laka_script.js');
                 xhr.open("GET", v + ".json");
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
                 xhr.setRequestHeader('X-Redmine-API-Key', 'e9f59fb2de1c541560987d2376098a0241ba45fe');
-                xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+		xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+		xhr.setRequestHeader('Access-Control-Allow-Methods', 'DELETE, POST, GET, OPTIONS');
+		xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
                 xhr.setRequestHeader ("Authorization", "Basic " + btoa('cu_lac' + ":" + 'Vong.Lac.L.P'));
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {
