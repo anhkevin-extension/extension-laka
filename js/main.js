@@ -19,9 +19,15 @@ function injectContentCss(css, title)
 	}
 }
 
-function injectContentScript(js) 
+function injectContentScript(js, title) 
 {
-    var script = document.createElement('script');
-	  script.innerHTML = js;
-	  document.head.appendChild(script);
+    var scriptElement = document.querySelector("script[title='" + title + "']");
+	if (scriptElement) {
+  		scriptElement.textContent = js;
+	} else {
+		var scriptNew = document.createElement("script");
+		scriptNew.setAttribute("title", title);
+	  	scriptNew.textContent = js;
+	  	document.head.appendChild(scriptNew);
+	}
 }
