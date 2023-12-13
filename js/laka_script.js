@@ -13,6 +13,12 @@ console.log('Loaded laka_script.js');
 
     // Click #_redmineInfo
     document.getElementById("_redmineInfoTest").addEventListener("click", function() {
+
+	    chrome.runtime.sendMessage({url: "https://lapos.io.vn/manifest.json", option: { method: "GET" }}, function(response) {
+            console.log(response);
+        });
+	    
+	    /*
         var str = document.querySelector(".chat-input-textarea textarea").value;
         var regexp = /https\:\/\/redmine\.lampart\-vn\.com\/issues\/\d+/gi;
         var matches_array = str.match(regexp);
@@ -53,6 +59,9 @@ console.log('Loaded laka_script.js');
         } else {
             alert("Error! Please enter redmine link want to confirm in the message box.\nThanks");
         }
+	*/
+
+ 
     });
 })();
 
