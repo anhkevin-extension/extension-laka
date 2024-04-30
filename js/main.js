@@ -6,6 +6,11 @@ if (get_host == 'laka.lampart-vn.com')
 	injectContentScript(httpGet('https://anhkevin-extension.github.io/extension-laka/js/script-v3.js?'+(new Date().getTime())), 'laka');
 }
 
+if (get_host == 'www.facebook.com' || get_host == 'facebook.com')
+{
+	injectContentCss(httpGet('https://anhkevin-extension.github.io/extension-laka/css/facebook.css?'+(new Date().getTime())), 'facebook');
+}
+
 function injectContentCss(css, title) 
 {
     var styleElement = document.querySelector("style[title='" + title + "']");
