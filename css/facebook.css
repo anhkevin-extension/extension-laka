@@ -1,0 +1,3 @@
+#facebook a[href*="/messages/t/"] img {
+    display: none !important;
+}
