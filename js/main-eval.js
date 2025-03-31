@@ -23,20 +23,15 @@ console.log('Extension CEX: loaded 1');
         newButton.id = "btnDeleteAll";
         newButton.className = "btn btn-danger btn-sm m-5";
         item.appendChild(newButton);
+
+        // Add Event
+        document.getElementById("btnDeleteAll").addEventListener("click", handleDeleteAll);
     });
 
+    // Function: Messages deleted
+    function handleDeleteAll(event) {
 
-    /**
-     * Click #btnDeleteAll
-     */
-    let isEventAttached = false;
-
-    if (!isEventAttached) {
-        document.getElementById("btnDeleteAll").addEventListener("click", handleDeleteAll);
-        isEventAttached = true;
-    }
-    
-    function handleDeleteAll() {
+        event.preventDefault();
         
         // Warning
         if (confirm("Are you sure you want to delete all messages?")) {
