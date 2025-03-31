@@ -32,7 +32,13 @@ console.log('Extension CEX: loaded 1');
     document.getElementById("btnDeleteAll").addEventListener("click", function() {
         
         // Warning
-        alert("Are you sure you want to delete all messages?");
+        if (confirm("Are you sure you want to delete all messages?")) {
+            // Code to execute if the user clicks "OK" (Yes)
+            console.log("Messages deleted.");
+        } else {
+            // Code to execute if the user clicks "Cancel" (No)
+            return;
+        }
 
         /** Start: delete message */
         let url_laka    = window.location.href;
