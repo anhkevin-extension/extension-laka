@@ -29,7 +29,10 @@ console.log('Extension CEX: loaded 1');
     /**
      * Click #btnDeleteAll
      */
-    document.getElementById("btnDeleteAll").addEventListener("click", function() {
+    document.getElementById("btnDeleteAll").removeEventListener("click", handleDeleteAll);
+    document.getElementById("btnDeleteAll").addEventListener("click", handleDeleteAll);
+    
+    function handleDeleteAll() {
         
         // Warning
         if (confirm("Are you sure you want to delete all messages?")) {
