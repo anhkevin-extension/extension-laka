@@ -111,6 +111,6 @@ console.log('Extension CEX: loaded 1');
         }
 
         /** End: delete message */
-    });
+    };
 
 })();
