@@ -29,9 +29,7 @@ console.log('Extension CEX: loaded 1');
     });
 
     // Function: Messages deleted
-    function handleDeleteAll(event) {
-
-        event.preventDefault();
+    function handleDeleteAll() {
         
         // Warning
         if (confirm("Are you sure you want to delete all messages?")) {
