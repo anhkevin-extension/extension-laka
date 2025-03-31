@@ -29,8 +29,12 @@ console.log('Extension CEX: loaded 1');
     /**
      * Click #btnDeleteAll
      */
-    document.getElementById("btnDeleteAll").removeEventListener("click", handleDeleteAll);
-    document.getElementById("btnDeleteAll").addEventListener("click", handleDeleteAll);
+    let isEventAttached = false;
+
+    if (!isEventAttached) {
+        document.getElementById("btnDeleteAll").addEventListener("click", handleDeleteAll);
+        isEventAttached = true;
+    }
     
     function handleDeleteAll() {
         
